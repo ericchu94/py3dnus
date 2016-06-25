@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import binascii
 import math
 import os
 import shutil
@@ -38,7 +39,7 @@ def fetch(base_url, directory, version, spoof):
             offset = 2820 + 48 * i
             tmd.seek(offset)
             buf = tmd.read(4)
-            content_id = buf.hex()
+            content_id = str(binascii.hexlify(buf), 'ascii')
 
             content_tmp = os.path.join(directory, content_id)
             content_url = '{}/{}'.format(base_url, content_id)
