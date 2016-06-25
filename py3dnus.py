@@ -67,8 +67,10 @@ def make(directory, name):
 
 
 def py3dnus(title, version, spoof):
-    if spoof and spoof > MAX_SPOOF_VERSION:
-        raise OverflowError('Spoof must be less than {}'.format(MAX_SPOOF_VERSION))
+    if spoof and (spoof < 0 or spoof > MAX_SPOOF_VERSION):
+        raise OverflowError(
+            'Spoof must be between 0 and {}'.format(MAX_SPOOF_VERSION),
+        )
 
     base_url = '{}/{}'.format(CDN, title)
     directory = os.path.join('tmp', title, str(version))
