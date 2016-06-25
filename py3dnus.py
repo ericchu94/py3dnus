@@ -52,11 +52,18 @@ def fetch(base_url, directory, version, spoof):
 
 
 def make(directory, name):
-    subprocess.check_call(
-        ['make_cdn_cia', directory, name],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    try:
+        subprocess.check_call(
+            ['make_cdn_cia', directory, name],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except:
+        subprocess.check_call(
+            ['./make_cdn_cia', directory, name],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
 
 def py3dnus(title, version, spoof):
