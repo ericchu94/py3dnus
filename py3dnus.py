@@ -38,7 +38,6 @@ def fetch(base_url, directory, version, spoof):
             offset = 2820 + 48 * i
             tmd.seek(offset)
             buf = tmd.read(4)
-
             content_id = buf.hex()
 
             content_tmp = os.path.join(directory, content_id)
@@ -67,8 +66,10 @@ def py3dnus(title, version, spoof):
     base_url = '{}/{}'.format(CDN, title)
     directory = os.path.join('tmp', title, str(version))
     name = title + '.cia'
+
     fetch(base_url, directory, version, spoof)
     make(directory, name)
+
     return name
 
 
@@ -82,6 +83,5 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-
     name = py3dnus(args.title, args.version, args.spoof)
     print('Created {}'.format(name))
