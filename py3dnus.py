@@ -52,11 +52,10 @@ def fetch(base_url, directory, version, spoof):
 
 
 def make(directory, name):
-    subprocess.run(
+    subprocess.check_call(
         ['make_cdn_cia', directory, name],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        check=True,
     )
 
 
